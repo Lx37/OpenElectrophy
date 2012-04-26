@@ -33,6 +33,7 @@ from detection.mteo import MTEODetection
 from waveform.ondetection import AlignWaveformOnDetection
 from waveform.onpeak import AlignWaveformOnPeak
 from feature.pcafeature import PcaFeature
+from sorting.gmm_mcmc import GaussianMixtureMCMC
 from sorting.gmm_em import SklearnGaussianMixtureEm
 from sorting.kmeans import SklearnKMeans
 from sorting.minibatchkmeans import SklearnMiniBatchKMeans
@@ -46,6 +47,7 @@ all_methods = [ ButterworthFilter,
                 AlignWaveformOnDetection,
                 AlignWaveformOnPeak,
                 PcaFeature,
+                GaussianMixtureMCMC,
                 SklearnGaussianMixtureEm,
                 SklearnKMeans,
                 SklearnMiniBatchKMeans,

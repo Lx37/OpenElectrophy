@@ -34,7 +34,7 @@ print
 #~ spikesorter.ManualThresholdDetection(sign= '-', threshold = -3.5,)
 spikesorter.MTEODetection(k_inc=1,k_max=5, median_thresh = 6.,)
 
-print spikesorter.spike_index_array.shape
+print "index array shape :",spikesorter.spike_index_array.shape
 print spikesorter.spike_index_array[0].shape
 print
 
@@ -47,7 +47,7 @@ print spikesorter.seg_spike_slices
 print spikesorter.spike_waveforms.shape
 print
 ## spikesorter.run_step(PcaFeature   , n_components = 3)
-spikesorter.PcaFeature(n_components = 3)
+spikesorter.PcaFeature(n_components = 2)
 
 print spikesorter.waveform_features.shape
 print spikesorter.feature_names

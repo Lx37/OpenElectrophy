@@ -73,7 +73,7 @@ class TimeSeeker(QWidget) :
             t.addWidget(self.popupStep)
             ag = QActionGroup(self.popupStep )
             ag.setExclusive( True)
-            for s in ['60s','30s', '1s', '100ms', '50ms', '5ms' ]:
+            for s in ['60s','10s', '1s', '100ms', '50ms', '5ms' ]:
                 act = QAction(s, self.popupStep, checkable = True)
                 ag.addAction(act)
                 self.popupStep.addAction(act)

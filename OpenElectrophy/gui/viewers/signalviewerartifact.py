@@ -67,7 +67,6 @@ class SignalViewerArtifact(SignalViewer):
         
         self.lenSig =  np.shape(self.analogsignals)[1]
         self.nb_channel = len(self.analogsignals)
-        print self.nb_channel
         
         #cross hair
         self.vLine = pg.InfiniteLine(angle=90, movable=False)
@@ -97,7 +96,6 @@ class SignalViewerArtifact(SignalViewer):
     #TODO first visu is wrong (when there is no signal) but becomes clean when signals are plotted on the viewver. why ?
     def loadArtifact(self):
         self.pos_artef = np.load(self.out_file)
-        print np.shape(self.pos_artef)
         for i in range(np.shape(self.pos_artef)[0]):
             self.nb_artef += 1
             region = pg.LinearRegionItem(values = self.pos_artef[i])
@@ -124,22 +122,17 @@ class SignalViewerArtifact(SignalViewer):
 
     def handle_click(self):
         modifiers = pg.Qt.QtGui.QApplication.keyboardModifiers()
-        if modifiers == pg.Qt.QtCore.Qt.ShiftModifier:
-            print('Shift+Click')
-        elif modifiers == pg.Qt.QtCore.Qt.ControlModifier:
+        if modifiers == pg.Qt.QtCore.Qt.ControlModifier: # Ctrl+Click action
             self.nb_artef +=1
-            print 'Nb_artef : ',self.nb_artef 
             artefpos = self.pos  ## On pourrait l avoir directement avec pg.Qt.QtGui.QCursor.pos() (=position absolue de la souris sur l ecran) puis un map2view
-            print 'artefpos : ',  artefpos
-
             region = pg.LinearRegionItem(values = [artefpos, artefpos + self.size_wartef])
             region.setZValue(self.nb_artef)
             region.sigRegionChangeFinished.connect(self.setCurentArtefactPos)
             self.regions.append(region)  #Could be a QList.. ?
             self.plot.addItem(region)
+        elif modifiers == pg.Qt.QtCore.Qt.ShiftModifier: # Shift+Click action
+            print('Shift+Click')
             
-        else:
-            print('Click')
         self.setCurentArtefactPos()
         
 
@@ -147,7 +140,6 @@ class SignalViewerArtifact(SignalViewer):
     def keyPressEvent(self, event):
         print event.key()
         if event.key() == pg.Qt.QtCore.Qt.Key_Delete:
-            print 'suppr'
             if self.regions != []:
                 num_region = [i for i,j in enumerate(self.pos_artef) if  self.pos>j[0] and self.pos<j[1]]
                 if num_region !=[]:
@@ -161,10 +153,9 @@ class SignalViewerArtifact(SignalViewer):
 
 
     def setCurentArtefactPos(self):
-        print 'maj artefact pos'
         if self.regions != []:
             self.pos_artef =  [self.regions[i].getRegion() for i,j in enumerate(self.regions)]
-        print self.pos_artef
+        #~ print self.pos_artef
     
     def closeEvent(self, event):
         self.setCurentArtefactPos()

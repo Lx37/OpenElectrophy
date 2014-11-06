@@ -10,6 +10,6 @@ from .eventviewer import EventViewer
 from .segmentviewer import SegmentViewer
 from .timefreqviewer import TimeFreqViewer
 from .spiketrainviewer import SpikeTrainViewer
-
+from .signalviewerartifact import SignalViewerArtifact
 
 
